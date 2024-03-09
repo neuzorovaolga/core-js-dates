@@ -17,8 +17,10 @@
  * '01 Jan 1970 00:00:00 UTC' => 0
  * '04 Dec 1995 00:12:00 UTC' => 818035920000
  */
-function dateToTimestamp(/* date */) {
-  throw new Error('Not implemented');
+function dateToTimestamp(date) {
+  const dateStart = new Date('01 Jan 1970 00:00:00 UTC');
+  const dateEnd = new Date(date);
+  return dateEnd - dateStart;
 }
 
 /**
@@ -31,8 +33,15 @@ function dateToTimestamp(/* date */) {
  * Date(2023, 5, 1, 8, 20, 55) => '08:20:55'
  * Date(2015, 10, 20, 23, 15, 1) => '23:15:01'
  */
-function getTime(/* date */) {
-  throw new Error('Not implemented');
+function getTime(date) {
+  const Data = new Date(date);
+  const Hour = Data.getHours();
+
+  const Minutes = Data.getMinutes();
+
+  const Seconds = Data.getSeconds();
+
+  return `${Hour.toString().length < 2 ? `0${Hour}` : Hour}:${Minutes.toString().length < 2 ? `0${Minutes}` : Minutes}:${Seconds.toString().length < 2 ? `0${Seconds}` : Seconds}`;
 }
 
 /**
@@ -46,8 +55,22 @@ function getTime(/* date */) {
  * '03 Dec 1995 00:12:00 UTC' => 'Sunday'
  * '2024-01-30T00:00:00.000Z' => 'Tuesday'
  */
-function getDayName(/* date */) {
-  throw new Error('Not implemented');
+function getDayName(date) {
+  const dates = new Date(date);
+
+  const daysOfWeek = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
+  const dayIndex = dates.getUTCDay();
+
+  return daysOfWeek[dayIndex];
 }
 
 /**
@@ -76,8 +99,16 @@ function getNextFriday(/* date */) {
  * 1, 2024 => 31
  * 2, 2024 => 29
  */
-function getCountDaysInMonth(/* month, year */) {
-  throw new Error('Not implemented');
+function getCountDaysInMonth(month, year) {
+  if (month < 1 || month > 12) {
+    return false;
+  }
+
+  const lastDayOfMonth = new Date(year, month, 0);
+
+  const lastDay = lastDayOfMonth.getDate();
+
+  return lastDay;
 }
 
 /**
